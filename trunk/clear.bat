@@ -1,1 +1,1 @@
-del out\*
+del *.aux *.out *.xdv *.log

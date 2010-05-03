@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\title{A New Approach to Linear Filtering and Prediction Problems}
+\author{R. E. KALMAN}
+\date{}
+\maketitle
+\abstract{The classical filtering and prediction problem is re-examined using the Bode-Shannon representation of random processes and the ¡°state transition¡± method of analysis of dynamic systems. New results are:
+\begin{itemize}
+\item[(1)] The formulation and methods of solution of the problem apply without modification to stationary and nonstationary statistics and to growing-memory and infinite-memory filters.
+\item[(2)] A nonlinear difference (or differential) equation is derived for the covariance matrix of the optimal estimation error. From the solution of this equation the co-efficients of the difference (or differential) equation of the optimal linear filter are ob-tained without further calculations.
+\item[(3)] The filtering problem is shown to be the dual of the noise-free regulator problem.
+\end{itemize}
+
+The new method developed here is applied to two well-known problems, confirming and extending earlier results.
+
+The discussion is largely self-contained and proceeds from first principles; basic concepts of the theory of random processes are reviewed in the Appendix.}
+\section{Introduction}
+An important class of theoretical and practical problems in communication and control is of a statistical nature. Such problems are: (i) Prediction of random signals; (ii) separation of random signals from random noise; (iii) detection of signals of known form (pulses, sinusoids) in the presence of random noise.
+
+In his pioneering work, Wiener [1] showed that problems (i) and (ii) lead to the so-called Wiener-Hopf integral equation; he also gave a method (spectral factorization) for the solution of this integral equation in the practically important special case of stationary statistics and rational spectra.
+
+Many extensions and generalizations followed Wiener¡¯s basic work. Zadeh and Ragazzini solved the finite-memory case [2]. Concurrently and independently of Bode and Shannon [3], they also gave a simplified method [2] of solution. Booton discussed the nonstationary Wiener-Hopf equation [4]. These results are now in standard texts [5-6]. A somewhat different approach along these main lines has been given recently by Darlington [7]. For extensions to sampled signals, see, e.g., Franklin [8], Lees [9]. Another approach based on the eigenfunctions of the Wiener-Hopf equation (which applies also to nonstationary problems whereas the preceding methods in general don¡¯t), has been pioneered by Davis [10] and applied by many others, e.g., Shinbrot [11], Blum [12], Pugachev [13], Solodovnikov [14].
+
+In all these works, the objective is to obtain the specification of a linear dynamic system (Wiener filter) which accomplishes the prediction, separation, or detection of a random signal.
+
+Present methods for solving the Wiener problem are subject to a number of limitations which seriously curtail their practical usefulness:
+\begin{itemize}
+\item[(1)] The optimal filter is specified by its impulse response. It is not a simple task to synthesize the filter from such data.
+\item[(2)] Numerical determination of the optimal impulse response is often quite involved and poorly suited to machine computation. The situation gets rapidly worse with increasing complexity of the problem.
+\item[(3)] Important generalizations (e.g., growing-memory filters, nonstationary prediction) require new derivations, frequently of considerable difficulty to the nonspecialist.
+\item[(4)] The mathematics of the derivations are not transparent. Fundamental assumptions and their consequences tend to be obscured.
+\end{itemize}
+
+This paper introduces a new look at this whole assemblage of problems, sidestepping the difficulties just mentioned. The following are the highlights of the paper:
+\begin{itemize}
+\item[(5)] \emph{Optimal Estimates and Orthogonal Projections}. The Wiener problem is approached from the point of view of conditional distributions and expectations. In this way, basic facts of the Wiener theory are quickly obtained; the scope of the results and the fundamental assumptions appear clearly. It is seen that all statistical calculations and results are based on first and second order averages; no other statistical data are needed. Thus difficulty (4) is eliminated. This method is well known in probability theory (see pp. 75--78 and 148--155 of Doob [15] and pp. 455--464 of Lo\`eve [16]) but has not yet been used extensively in engineering.
+\item[(6)] \emph{Models for Random Processes}. Following, in particular, Bode and Shannon [3], arbitrary random signals are represented (up to second order average statistical properties) as the output of a linear dynamic system excited by independent or uncorrelated random signals (¡°white noise¡±). This is a standard trick in the engineering applications of the Wiener theory [2--7]. The approach taken here differs from the conventional one only in the way in which linear dynamic systems are described. We shall emphasize the concepts of state and state transition; in other words, linear systems will be specified by systems of first-order difference (or differential) equations. This point of view is natural and also necessary in order to take advantage of the simplifications mentioned under (5).
+\item[(7)] \emph{Solution of the Wiener Problem}. With the state-transition method, a single derivation covers a large variety of problems: growing and infinite memory filters, stationary and nonstationary statistics, etc.; difficulty (3) disappears. Having guessed the ¡°state¡± of the estimation (i.e., filtering or prediction) problem correctly, one is led to a nonlinear difference (or differential) equation for the covariance matrix of the optimal estimation error. This is vaguely analogous to the Wiener-Hopf equation. Solution of the equation for the covariance matrix starts at the time $t_0$ when the first observation is taken; at each later time $t$ the solution of the equation represents the covariance of the optimal prediction error given observations in the interval $(t_0, t)$. From the covariance matrix at time $t$ we obtain at once, without further calculations, the coefficients (in general, time-varying) characterizing the optimal linear filter.
+\item[(8)] \emph{The Dual Problem}. The new formulation of the Wiener problem brings it into contact with the growing new theory of control systems based on the ¡°state¡± point of view [17--24]. It turns out, \emph{surprisingly}, that the Wiener problem is the dual of the noise-free optimal regulator problem, which has been solved previously by the author, using the state-transition method to great advantage [18, 23, 24]. The mathematical background of the two problems is identical--this has been suspected all along, but until now the analogies have never been made explicit.
+\item[(9)] \emph{Applications}. The power of the new method is most apparent in theoretical investigations and in numerical answers to complex practical problems. In the latter case, it is best to resort to machine computation. Examples of this type will be discussed later. To provide some feel for applications, two standard examples from nonstationary prediction are included; in these cases the solution of the nonlinear difference equation mentioned under (7) above can be obtained even in closed form.
+\end{itemize}
+
+For easy reference, the main results are displayed in the form of theorems. Only Theorems 3 and 4 are original. The next section and the Appendix serve mainly to review well-known material in a form suitable for the present purposes.
+
+\section{Notation Coventions}
+Throughout the paper, we shall deal mainly with \emph{discrete} (or \emph{sampled}) dynamic systems; in other words, signals will be observed at equally spaced points in time (\emph{sampling instants}). By suitable choice of the time scale, the constant intervals between successive sampling instants (\emph{sampling periods}) may be chosen as unity. Thus variables referring to time, such as $t$, $t_0$, $\tau$, $T$ will always be integers. The restriction to discrete dynamic systems is not at all essential (at least from the engineering point of view); by using the discreteness, however, we can keep the mathematics rigorous and yet elementary. Vectors will be denoted by small bold-face letters: $\mathbf{a}$, $\mathbf{b}$, $\dotsc$, $\mathbf{u}$, $\mathbf{x}$, $\mathbf{y}$, $\dotsc$ A vector or more precisely an $n$-vector is a set of $n$ numbers $x_1$, $\dotsc$ $x_n$; the $x_i$ are the \emph{co-ordinates} or components of the vector $\mathbf{x}$.
+
+Matrices will be denoted by capital bold-face letters: $\mathbf{A}$, $\mathbf{B}$, $\mathbf{Q}$, $\boldsymbol{\Phi}$, $\boldsymbol{\Psi}$, $\dotsc$; they are $m \times n$ arrays of elements $a_{ij}$, $b_{ij}$, $q_{ij}$, $\dotsc$ The \emph{transpose} (interchanging rows and columns) of a matrix will be denoted by the prime. In manipulating formulas, it will be convenient to regard a vector as a matrix with a single column.
+
+Using the conventional definition of matrix multiplication, we write the \emph{scalar product} of two $n$-vector $\mathbf{x}$, $\mathbf{y}$ as
+\begin{equation*}
+\mathbf{x'y}=\sum^n_{i=1}x_iy_i=\mathbf{y'x}
+\end{equation*}
+The scalar product is clearly a scalar, i.e., not a vector, quantity. Similarly, the quadratic form associated with the $n \times n$ matrix $\mathbf{Q}$ is,
+\begin{equation*}
+\mathbf{x'Qx}=\sum^n_{i,j=1}x_i q_{ij} x_j
+\end{equation*}
+We define the expression $\mathbf{xy'}$ where $\mathbf{x'}$ is an $m$-vector and $\mathbf{y}$ is an $n$-vector to be the $m \times n$ matrix with elements $x_i y_j$.
+
+We write $E(\mathbf{x}) = E\mathbf{x}$ for the expected value of the random vector $\mathbf{x}$ (see Appendix). It is usually convenient to omit the brackets after $E$. This does not result in confusion in simple cases since constants and the operator $E$ commute. Thus $E\mathbf{xy'} =$ matrix with elements $E(x_i y_j)$; $E\mathbf{x}E\mathbf{y'} =$ matrix with elements $E(x_i)E(y_j)$.
+
+For ease of reference, a list of the principal symbols used is given below.
+\begin{table}[htbp]
+\centering
+\begin{tabular}{rl}
+\multicolumn{2}{l}{\textbf{Optimal Estimates}}\\
+$t$ & time in general, present time.\\
+$t_0$ & time at which observations start.\\
+$x_1(t),x_2(t)$ & basic random variables.\\
+$y(t)$ & observed random variable.\\
+$x^\ast (t_1 \vert t)$ & optimal estimate of $x_1(t_1)$ given $y(t_0), \dotsc, y(t)$\\
+$L$ & loss function (non random function of its argument).\\
+$\epsilon$ & estimation error (random variable).\\
+\multicolumn{2}{l}{\textbf{Orthogonal Projections}}\\
+$\mathbf{\mathcal{Y}}(t)$ & linear manifold generated by the random variables $y(t_0), \dotsc, y(t)$.\\
+$\bar{x}(t_1 \vert t)$ & orthogonal projection of $x(t_1)$ on $\mathbf{\mathcal{Y}}(t)$.\\
+$\tilde{x}(t_1 \vert t)$ & component of $x(t_1)$ orthogonal to $\mathbf{\mathcal{Y}}(t)$.\\
+\multicolumn{2}{l}{\textbf{Models for Random Processes}}\\
+$\boldsymbol{\Phi}(t+1 ; t)$ & transition matrix\\
+$\mathbf{Q}(t)$ & covariance of random excitation\\
+\multicolumn{2}{l}{\textbf{Solution of the Wiener Problem}}\\
+$\mathbf{x}(t)$ & basic random variable.\\
+$\mathbf{y}(t)$ & observed random variable.\\
+$\mathbf{\mathcal{Y}}(t)$ & linear manifold generated by $\mathbf{y}(t_0), \dotsc, \mathbf{y}(t)$.\\
+$\mathbf{\mathcal{Z}}(t)$ & linear manifold generated by $\tilde{\mathbf{y}}(t \vert t-1)$.\\
+$\mathbf{x}^\ast(t_1 \vert t)$ & optimal estimate of $\mathbf{x}(t_1)$ given $\mathbf{\mathcal{Y}}(t)$.\\
+$\tilde{\mathbf{x}}(t_1 \vert t)$ & error in optimal estimate of $\mathbf{x}(t_1)$ given $\mathbf{\mathcal{Y}}(t)$.
+\end{tabular}
+\end{table}
+
+\section{Optimal Estimates}
+\section{Orthogonal Projections}
+\section{Models for Random Processes}
+\section{Solution of the Wiener problem}
+\section{The Dual Problem}
+\section{Applications}
+\section{Conclusions}
+\end{document}

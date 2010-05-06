@@ -1,11 +1,18 @@
 \documentclass{article}
+\usepackage{graphicx}
+\usepackage{enumitem}
 \usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem1a}{Theorem 1-A}
+\newtheorem*{corollary}{Corollary}
 \begin{document}
 \title{A New Approach to Linear Filtering and Prediction Problems}
 \author{R. E. KALMAN}
 \date{}
 \maketitle
-\abstract{The classical filtering and prediction problem is re-examined using the Bode-Shannon representation of random processes and the °∞state transition°± method of analysis of dynamic systems. New results are:
+\abstract{The classical filtering and prediction problem is re-examined using the Bode-Shannon representation of random processes and the ‚Äústate transition‚Äù method of analysis of dynamic systems. New results are:
 \begin{itemize}
 \item[(1)] The formulation and methods of solution of the problem apply without modification to stationary and nonstationary statistics and to growing-memory and infinite-memory filters.
 \item[(2)] A nonlinear difference (or differential) equation is derived for the covariance matrix of the optimal estimation error. From the solution of this equation the co-efficients of the difference (or differential) equation of the optimal linear filter are ob-tained without further calculations.
@@ -20,7 +27,7 @@ An important class of theoretical and practical problems in communication and co
 
 In his pioneering work, Wiener [1] showed that problems (i) and (ii) lead to the so-called Wiener-Hopf integral equation; he also gave a method (spectral factorization) for the solution of this integral equation in the practically important special case of stationary statistics and rational spectra.
 
-Many extensions and generalizations followed Wiener°Øs basic work. Zadeh and Ragazzini solved the finite-memory case [2]. Concurrently and independently of Bode and Shannon [3], they also gave a simplified method [2] of solution. Booton discussed the nonstationary Wiener-Hopf equation [4]. These results are now in standard texts [5-6]. A somewhat different approach along these main lines has been given recently by Darlington [7]. For extensions to sampled signals, see, e.g., Franklin [8], Lees [9]. Another approach based on the eigenfunctions of the Wiener-Hopf equation (which applies also to nonstationary problems whereas the preceding methods in general don°Øt), has been pioneered by Davis [10] and applied by many others, e.g., Shinbrot [11], Blum [12], Pugachev [13], Solodovnikov [14].
+Many extensions and generalizations followed Wiener‚Äôs basic work. Zadeh and Ragazzini solved the finite-memory case [2]. Concurrently and independently of Bode and Shannon [3], they also gave a simplified method [2] of solution. Booton discussed the nonstationary Wiener-Hopf equation [4]. These results are now in standard texts [5-6]. A somewhat different approach along these main lines has been given recently by Darlington [7]. For extensions to sampled signals, see, e.g., Franklin [8], Lees [9]. Another approach based on the eigenfunctions of the Wiener-Hopf equation (which applies also to nonstationary problems whereas the preceding methods in general don‚Äôt), has been pioneered by Davis [10] and applied by many others, e.g., Shinbrot [11], Blum [12], Pugachev [13], Solodovnikov [14].
 
 In all these works, the objective is to obtain the specification of a linear dynamic system (Wiener filter) which accomplishes the prediction, separation, or detection of a random signal.
 
@@ -35,9 +42,9 @@ Present methods for solving the Wiener problem are subject to a number of limita
 This paper introduces a new look at this whole assemblage of problems, sidestepping the difficulties just mentioned. The following are the highlights of the paper:
 \begin{itemize}
 \item[(5)] \emph{Optimal Estimates and Orthogonal Projections}. The Wiener problem is approached from the point of view of conditional distributions and expectations. In this way, basic facts of the Wiener theory are quickly obtained; the scope of the results and the fundamental assumptions appear clearly. It is seen that all statistical calculations and results are based on first and second order averages; no other statistical data are needed. Thus difficulty (4) is eliminated. This method is well known in probability theory (see pp. 75--78 and 148--155 of Doob [15] and pp. 455--464 of Lo\`eve [16]) but has not yet been used extensively in engineering.
-\item[(6)] \emph{Models for Random Processes}. Following, in particular, Bode and Shannon [3], arbitrary random signals are represented (up to second order average statistical properties) as the output of a linear dynamic system excited by independent or uncorrelated random signals (°∞white noise°±). This is a standard trick in the engineering applications of the Wiener theory [2--7]. The approach taken here differs from the conventional one only in the way in which linear dynamic systems are described. We shall emphasize the concepts of state and state transition; in other words, linear systems will be specified by systems of first-order difference (or differential) equations. This point of view is natural and also necessary in order to take advantage of the simplifications mentioned under (5).
-\item[(7)] \emph{Solution of the Wiener Problem}. With the state-transition method, a single derivation covers a large variety of problems: growing and infinite memory filters, stationary and nonstationary statistics, etc.; difficulty (3) disappears. Having guessed the °∞state°± of the estimation (i.e., filtering or prediction) problem correctly, one is led to a nonlinear difference (or differential) equation for the covariance matrix of the optimal estimation error. This is vaguely analogous to the Wiener-Hopf equation. Solution of the equation for the covariance matrix starts at the time $t_0$ when the first observation is taken; at each later time $t$ the solution of the equation represents the covariance of the optimal prediction error given observations in the interval $(t_0, t)$. From the covariance matrix at time $t$ we obtain at once, without further calculations, the coefficients (in general, time-varying) characterizing the optimal linear filter.
-\item[(8)] \emph{The Dual Problem}. The new formulation of the Wiener problem brings it into contact with the growing new theory of control systems based on the °∞state°± point of view [17--24]. It turns out, \emph{surprisingly}, that the Wiener problem is the dual of the noise-free optimal regulator problem, which has been solved previously by the author, using the state-transition method to great advantage [18, 23, 24]. The mathematical background of the two problems is identical--this has been suspected all along, but until now the analogies have never been made explicit.
+\item[(6)] \emph{Models for Random Processes}. Following, in particular, Bode and Shannon [3], arbitrary random signals are represented (up to second order average statistical properties) as the output of a linear dynamic system excited by independent or uncorrelated random signals (‚Äúwhite noise‚Äù). This is a standard trick in the engineering applications of the Wiener theory [2--7]. The approach taken here differs from the conventional one only in the way in which linear dynamic systems are described. We shall emphasize the concepts of state and state transition; in other words, linear systems will be specified by systems of first-order difference (or differential) equations. This point of view is natural and also necessary in order to take advantage of the simplifications mentioned under (5).
+\item[(7)] \emph{Solution of the Wiener Problem}. With the state-transition method, a single derivation covers a large variety of problems: growing and infinite memory filters, stationary and nonstationary statistics, etc.; difficulty (3) disappears. Having guessed the ‚Äústate‚Äù of the estimation (i.e., filtering or prediction) problem correctly, one is led to a nonlinear difference (or differential) equation for the covariance matrix of the optimal estimation error. This is vaguely analogous to the Wiener-Hopf equation. Solution of the equation for the covariance matrix starts at the time $t_0$ when the first observation is taken; at each later time $t$ the solution of the equation represents the covariance of the optimal prediction error given observations in the interval $(t_0, t)$. From the covariance matrix at time $t$ we obtain at once, without further calculations, the coefficients (in general, time-varying) characterizing the optimal linear filter.
+\item[(8)] \emph{The Dual Problem}. The new formulation of the Wiener problem brings it into contact with the growing new theory of control systems based on the ‚Äústate‚Äù point of view [17--24]. It turns out, \emph{surprisingly}, that the Wiener problem is the dual of the noise-free optimal regulator problem, which has been solved previously by the author, using the state-transition method to great advantage [18, 23, 24]. The mathematical background of the two problems is identical--this has been suspected all along, but until now the analogies have never been made explicit.
 \item[(9)] \emph{Applications}. The power of the new method is most apparent in theoretical investigations and in numerical answers to complex practical problems. In the latter case, it is best to resort to machine computation. Examples of this type will be discussed later. To provide some feel for applications, two standard examples from nonstationary prediction are included; in these cases the solution of the nonlinear difference equation mentioned under (7) above can be obtained even in closed form.
 \end{itemize}
 
@@ -97,6 +104,55 @@ As was pointed out by Wiener [1], the natural setting of the estimation problem 
 \label{eq1}
 Pr[x_1(t_1) \le \xi_1 \vert y(t_0)=\eta(t_0), \dotsc, y(t)=\eta(t)]=F(\xi_1)
 \end{equation}
+
+Evidently, $F(\xi_1)$ represents all the information which the measurement of the random variables $y(t_0)$, $\dotsc$, $y(t)$ has conveyed about the random variable $x_1(t_1)$. Any statistical estimate of the random variable $x_1(t_1)$ will be some function of this distribution and therefore a (nonrandom) function of the random variables $y(t_0)$, $\dotsc$, $y(t)$. This statistical estimate is denoted by $X_1(t_1 \vert t)$, or by just $X_1(t_1)$ or $X_1$ when the set of observed random variables or the time at which the estimate is required are clear from context.
+
+Suppose now that X1 is given as a fixed function of the random variables $y(t_0)$, $\dotsc$, $y(t)$. Then $X_1$ is itself a random variable and its actual value is known whenever the actual values of $y(t_0)$, $\dotsc$, $y(t)$ are known. In general, the actual value of $X_1(t_1)$ will be different from the (unknown) actual value of $x_1(t_1)$. To arrive at a rational way of determining $X_1$, it is natural to assign a penalty or loss for incorrect estimates. Clearly, the loss should be a (i) positive, (ii) nondecreasing function of the estimation error $\epsilon = x_1(t_1)-X_1(t_1)$. Thus we define a \emph{loss function} by
+\begin{equation*}
+L(0)=0
+\end{equation*}
+\begin{equation}
+\label{eq2}
+L(\epsilon_2) \le L(\epsilon_1) \le 0 \text{ when } \epsilon_2 \le \epsilon_1 \le 0
+\end{equation}
+\begin{equation*}
+L(\epsilon)=L(-\epsilon) 
+\end{equation*}
+Some common examples of loss functions are: $L(\epsilon) = a\epsilon^2$, $a\epsilon^4$, $a\vert \epsilon \vert$, $a[1 - \exp(-\epsilon^2)]$, etc., where $a$ is a positive constant.
+
+One (but by no means the only) natural way of choosing the random variable $X_1$ is to require that this choice should minimize the average loss or risk
+\begin{equation}
+\label{eq3}
+E\{L[x_1(t_1)-X_1(t_1)]\}=E[E\{L[x(t_1)-X_1(t_1)] \vert y(t_0), \dotsc, y(t)\}]
+\end{equation}
+Since the first expectation on the right-hand side of (\ref{eq3}) does not depend on the choice of $X_1$ but only on $y(t_0)$, $\dotsc$, $y(t)$, it is clear that minimizing (\ref{eq3}) is equivalent to minimizing
+\begin{equation}
+\label{eq4}
+E\{L[x_1(t_1)-X_1(t_1)] \vert y(t_0), \dotsc, y(t)\}
+\end{equation}
+Under just slight additional assumptions, optimal estimates can be characterized in a simple way.
+
+\begin{theorem}
+\label{th1}
+Assume that L is of type (\ref{eq2}) and that the conditional distribution function $F(\xi)$ defined by (\ref{eq1}) is:
+\begin{itemize}
+\item[A] symmetric about the mean $\bar{\xi}$:
+    \begin{equation*}
+    F(\xi-\bar{\xi})=1-F(\bar{\xi}-xi)
+    \end{equation*}
+\item[B] convex for $\xi \le \bar{\xi}$:
+    \begin{multline*}
+    F(\lambda\xi_1+(1-\lambda)\xi_2) \le \lambda F(\xi_1)+(1-\lambda)F(\xi_2)\\
+    \text{for all }\xi_1,\xi_2 \le \bar{\xi} \text{ and } 0 \le \lambda \le 1
+    \end{multline*}
+for all $\xi_1$, $\xi_2 \le \xi$ and $0 \le \lambda \le 1$
+\end{itemize}
+Then the random variable $x_1^\ast(t_1 \vert t)$ which minimizes the average loss (\ref{eq3}) is the conditional expectation
+\begin{equation}
+\label{eq5}
+x^{\ast}_1(t_1 \vert t)=E[x_1(t_1) \vert y(t_0),\dotsc,y(t)]
+\end{equation}
+\end{theorem}
 
 \section{Orthogonal Projections}
 \section{Models for Random Processes}

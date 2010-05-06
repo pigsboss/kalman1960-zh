@@ -1,5 +1,5 @@
 build: kalman1960-zh.xdv
-	xdvipdfmx kalman1960-zh.xdv
+	xdvipdfmx -o bin/kalman1960-zh.pdf kalman1960-zh.xdv
 kalman1960-zh.xdv: kalman1960-zh.tex
 	xelatex -no-pdf src/kalman1960-zh.tex
 	xelatex -no-pdf src/kalman1960-zh.tex
@@ -8,4 +8,4 @@ clean:
 all:
 	xelatex -no-pdf src/kalman1960-zh.tex
 	xelatex -no-pdf src/kalman1960-zh.tex
-	xdvipdfmx kalman1960-zh.xdv
+	xdvipdfmx -o bin/kalman1960-zh.pdf kalman1960-zh.xdv

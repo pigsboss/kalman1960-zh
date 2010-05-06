@@ -154,6 +154,33 @@ x^{\ast}_1(t_1 \vert t)=E[x_1(t_1) \vert y(t_0),\dotsc,y(t)]
 \end{equation}
 \end{theorem}
 
+\textbf{Proof:} As pointed out recently by Sherman [25], this theorem follows immediately from a well-known lemma in probability theory.
+\begin{corollary}
+If the random processes $\{x_1(t)\}$, $\{x_2(t)\}$, and $\{y(t)\}$ are gaussian, Theorem \ref{th1} holds.
+\end{corollary}
+\textbf{Proof:} By Theorem 5, (A) (see Appendix), conditional distributions on a gaussian random process are gaussian. Hence the requirements of Theorem \ref{th1} are always satisfied.
+
+In the control system literature, this theorem appears sometimes in a form which is more restrictive in one way and more general in another way:
+\begin{theorem1a}
+\label{th1a}
+If $L(\epsilon) = \epsilon^2$, then Theorem \ref{th1} is true without assumptions (A) and (B).
+\end{theorem1a}
+
+\textbf{Proof:} Expand the conditional expectation (\ref{eq4}):
+\begin{equation*}
+E[x_1^2(t_1) \vert y(t_0),\dotsc,y(t)]-2X_1(t_1)E[x_1(t_1) \vert y(t_0),\dotsc,y(t)]+X_1^2(t_1)
+\end{equation*}
+and differentiate with respect to $X_1(t_1)$. This is not a completely rigorous argument; for a simple rigorous proof see Doob [15], pp. 77-78.
+
+\textbf{Remarks.}(a) As far as the author is aware, it is not known what is the most general class of random processes ${x_1(t)}$, ${x_2(t)}$ for which the conditional distribution function satisfies the requirements of Theorem \ref{th1}.
+
+(b) Aside from the note of Sherman, Theorem \ref{th1} apparently has never been stated explicitly in the control systems literature. In fact, one finds many statements to the effect that loss functions of the general type (\ref{eq2}) cannot be conveniently handled mathematically.
+
+(c) In the sequel, we shall be dealing mainly with vectorvalued random variables. In that case, the estimation problem is stated as: Given a vector-valued random process ${\mathbf{x}(t)}$ and observed random variables $\mathbf{y}(t_0)$, $\dotsc$, $\mathbf{y}(t)$, where $\mathbf{y}(t) = \mathbf{M}\mathbf{x}(t)$ ($\mathbf{M}$ being a singular matrix; in other words, not all co-ordinates of $\mathbf{x}(t)$ can be observed), find an estimate $\mathbf{X}(t_1)$ which minimizes the expected loss $E[L(\Vert x(t_1) - X(t_1)\Vert)]$, $\Vert$ $\Vert$ being the norm of a vector. Theorem \ref{th1} remains true in the vector case also, provided we require that the conditional distribution function of the n coordinates of the vector $\mathbf{x}(t_1)$,
+\begin{equation*}
+Pr[x_1(t_1) \le \xi_1,\dotsc,x_n(t_1) \le \xi_n \vert \mathbf{y}(t_0),\dotsc,\mathbf{y}(t)]=F(\xi_1,\dotsc,\xi_n)
+\end{equation*}
+be symmetric with respect to the n variables $\xi_1 - \bar{xi}_1$, $\dotsc$, $\xi_n - \bar{\xi}_n$ and convex in the region where all of these variables are negative.
 \section{Orthogonal Projections}
 \section{Models for Random Processes}
 \section{Solution of the Wiener problem}

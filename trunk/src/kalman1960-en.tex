@@ -293,6 +293,183 @@ part (A) shows that the orthogonal projection is the optimal estimate for all re
 of all $m$ co-ordinates of each of the random vectors $y(t_0)$, $\dotsc$, $y(t)$. The rest of the story proceeds as before.
 (g) Theorem \ref{th2} states in effect that the optimal estimate under conditions (A) or (B) is a linear combination of all previous observations. In other words, the optimal estimate can be regarded as the output of a linear filter, with the input being the actually occurring values of the observable random variables; Theorem \ref{th2} gives a way of computing the impulse response of the optimal filter. As pointed out before, knowledge of this impulse response is not a complete solution of the problem; for this reason, no explicit formulas for the calculation of the impulse response will be given.
 \section{Models for Random Processes}
+In dealing with physical phenomena, it is not sufficient to give
+an empirical description but one must have also some idea of the
+underlying causes. Without being able to separate in some sense
+causes and effects, i.e., without the assumption of causality, one
+can hardly hope for useful results.
+
+It is a fairly generally accepted fact that primary macroscopic
+sources of random phenomena are independent gaussian processes.
+5 A well-known example is the noise voltage produced in a
+resistor due to thermal agitation. In most cases, observed random
+phenomena are not describable by independent random variables.
+The statistical dependence (correlation) between random signals
+observed at different times is usually explained by the presence of
+a dynamic system between the primary random source and the
+observer. Thus a random function of time may be thought of as the
+output of a dynamic system excited by an independent gaussian
+random process.
+
+An important property of gaussian random signals is that they
+remain gaussian after passing through a linear system (Theorem 5
+(A)). Assuming independent gaussian primary random sources, if
+the observed random signal is also gaussian, we may assume that
+the dynamic system between the observer and the primary source
+is linear. This conclusion may be forced on us also because of
+lack of detailed knowledge of the statistical properties of the
+observed random signal: Given any random process with known
+first and second-order averages, we can find a gaussian random
+process with the same properties (Theorem 5 (C)). Thus gaussian
+distributions and linear dynamics are natural, mutually plausible
+assumptions particularly when the statistical data are scant.
+
+How is a dynamic system (linear or nonlinear) described? The
+fundamental concept is the notion of the state. By this is meant,
+intuitively, some quantitative information (a set of numbers, a
+function, etc.) which is the least amount of data one has to know
+about the past behavior of the system in order to predict its future
+behavior. The dynamics is then described in terms of state
+transitions, i.e., one must specify how one state is transformed
+into another as time passes.
+
+A linear dynamic system may be described in general by the
+vector differential equation
+\begin{equation}
+\label{eq12}
+\left.\begin{aligned}
+&d\mathbf{x}/dt=\mathbf{F}(t)\mathbf{x}+\mathbf{D}(t)\mathbf{u}(t)\\
+\text{ and }\qquad&\\
+&\mathbf{y}(t)=\mathbf{M}(t)\mathbf{x}(t)
+\end{aligned}\right\}
+\end{equation}
+where x is an n-vector, the state of the system (the components xi
+of x are called state variables); u(t) is an m-vector (m ≤ n)
+representing the inputs to the system; F(t) and D(t) are n × n,
+respectively, n × m matrices. If all coefficients of F(t), D(t), M(t)
+are constants, we say that the dynamic system (12) is timeinvariant
+or stationary. Finally, y(t) is a p-vector denoting the
+outputs of the system; M(t) is an n × p matrix; p ≤ n
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\paperwidth]{fig/fg1.pdf}
+\caption{Matrix block diagram of the general linear continuous-dynamic system}
+\label{fg1}
+\end{figure}
+
+The physical interpretation of (12) has been discussed in detail
+elsewhere [18, 20, 23]. A look at the block diagram in Fig. 1 may
+be helpful. This is not an ordinary but a matrix block diagram (as
+revealed by the fat lines indicating signal flow). The integrator in Fig. 1 actually stands for n integrators such that the output of
+each is a state variable; F(t) indicates how the outputs of the
+integrators are fed back to the inputs of the integrators. Thus fij(t)
+is the coefficient with which the output of the jth integrator is fed
+back to the input of the ith integrator. It is not hard to relate this
+formalism to more conventional methods of linear system
+analysis.
+
+If we assume that the system (12) is stationary and that u(t) is
+constant during each sampling period, that is
+\begin{equation}
+\label{eq13}
+\mathbf{u}(t+\tau)=\mathbf{u}(t)\text{; }0 \le \tau < 1\text{, }t=0,1,\dotsc
+\end{equation}
+then (12) can be readily transformed into the more convenient
+discrete form.
+\begin{equation*}
+\mathbf{x}(t+1)=\boldsymbol{\Phi}(1)\mathbf{x}(t)+\boldsymbol{\Delta}(1)\mathbf{u}(t)\text{; }t=0,1,\dotsc
+\end{equation*}
+where [18,20]
+\begin{equation*}
+\boldsymbol{\Phi}(1)=\exp\mathbf{F}=\sum^\infty_{i=0}\mathbf{F}^i/i!\text{ (}\mathbf{F}^0=\text{unit matrix}\text{)}
+\end{equation*}
+and
+\begin{equation*}
+\boldsymbol{\Delta}(1)=\left(\int^1_0 \exp\mathbf{F}\tau d \tau\right)\mathbf{D}
+\end{equation*}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.5\paperwidth]{fig/fg2.pdf}
+\caption{Matrix block diagram of the general linear discrete-dynamic system}
+\label{fg2}
+\end{figure}
+See Fig. 2. One could also express exp Fτ in closed form using
+Laplace transform methods [18, 20, 22, 24]. If u(t) satisfies (13)
+but the system (12) is nonstationary, we can write analogously
+\begin{equation}
+\label{eq14}
+\left.\begin{aligned}
+\mathbf{x}(t+1)&=\boldsymbol{\Phi}(t+1;t)+\boldsymbol{\Delta}(t)\mathbf{u}(t)\\
+\mathbf{y}(t)&=\mathbf{M}(t)\mathbf{x}(t)
+\end{aligned}\right\}
+\qquad t=0,1,\dotsc
+\end{equation}
+but of course now Φ(t + 1; t), Δ(t) cannot be expressed in general
+in closed form. Equations of type (14) are encountered frequently
+also in the study of complicated sampled-data systems
+[22]. See Fig. 2
+
+Φ(t + 1; t) is the transition matrix of the system (12) or (14).
+The notation Φ(t2; t1) (t2, t1 = integers) indicates transition from
+time t1 to time t2. Evidently Φ(t; t) = I = unit matrix. If the system
+(12) is stationary then Φ(t + 1; t) = Φ(t + 1 – t) = Φ(1) = const.
+Note also the product rule: Φ(t; s)Φ(s; r) = Φ(t; r) and the inverse
+rule Φ–1(t; s) = Φ(s; t), where t, s, r are integers. In a stationary
+system, Φ(t; τ) = exp F(t – τ).
+
+As a result of the preceding discussion, we shall represent random
+phenomena by the model
+\begin{equation}
+\label{eq15}
+\mathbf{x}(t+1)=\boldPhi(t+1;t)\mathbf{x}(t)+\mathbf{u}(t)
+\end{equation}
+where {u(t)} is a vector-valued, independent, gaussian random
+process, with zero mean, which is completely described by (in
+view of Theorem 5 (C))
+\begin{align*}
+E\mathbf{u}(t)=0 \text{ for all } t;\\
+E\mathbf{u}(t)\mathbf{u'}(s)=0 \text{ if } t \ne s\\
+E\mathbf{u}(t)\mathbf{u'}(t)=\mathbf{G}(t).
+\end{align*}
+Of course (Theorem 5 (A)), x(t) is then also a gaussian random
+process with zero mean, but it is no longer independent. In fact, if
+we consider (15) in the steady state (assuming it is a stable system),
+in other words, if we neglect the initial state x(t0), then
+\begin{equation*}
+\mathbf{x}(t)=\sum^{t-1}_{r=-\infty}\boldPhi(t;r+1)\mathbf{u}(r).
+\end{equation*}
+Therefore if t ≥ s we have
+\begin{equation*}
+E\mathbf{x}(t)\mathbf{x'}(s)=\sum^{s-1}_{r=-\infty}\boldPhi(t;r+1)\mathbf{Q'}(r)\boldsymbol{\Phi'}(s;r+1).
+\end{equation*}
+Thus if we assume a linear dynamic model and know the
+statistical properties of the gaussian random excitation, it is easy
+to find the corresponding statistical properties of the gaussian
+random process {x(t)}.
+
+In real life, however, the situation is usually reversed. One is
+given the covariance matrix Ex(t)x'(s) (or rather, one attempts to
+estimate the matrix from limited statistical data) and the problem
+is to get (15) and the statistical properties of u(t). This is a subtle
+and presently largely unsolved problem in experimentation and
+data reduction. As in the vast majority of the engineering
+literature on the Wiener problem, we shall find it convenient to
+start with the model (15) and regard the problem of obtaining the
+model itself as a separate question. To be sure, the two problems
+should be optimized jointly if possible; the author is not aware,
+however, of any study of the joint optimization problem.
+
+In summary, the following assumptions are made about random
+processes:
+
+Physical random phenomena may be thought of as due to
+primary random sources exciting dynamic systems. The primary
+sources are assumed to be independent gaussian random
+processes with zero mean; the dynamic systems will be linear. The
+random processes are therefore described by models such as (15).
+The question of how the numbers specifying the model are
+obtained from experimental data will not be considered.
 \section{Solution of the Wiener problem}
 \section{The Dual Problem}
 \section{Applications}

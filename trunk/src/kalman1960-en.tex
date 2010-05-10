@@ -9,6 +9,8 @@
 \newtheorem*{corollary}{Corollary}
 \newcommand{\manf}[1]{\mathbf{\mathcal{#1}}}
 \newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\boldPhi}{\boldsymbol{\Phi}}
+\newcommand{\boldDelta}{\boldsymbol{\Delta}}
 \begin{document}
 \title{A New Approach to Linear Filtering and Prediction Problems}
 \author{R. E. KALMAN}
@@ -103,7 +105,7 @@ To have a concrete description or the type of problems to be studied, consider t
 
 As was pointed out by Wiener [1], the natural setting of the estimation problem belongs to the realm of probability theory and statistics. Thus signal, noise, and their sum will be random variables, and consequently they may be regarded as random processes. From the probabilistic description of the random processes we can determine the probability with which a particular sample of the signal and noise will occur. For any given set of measured values $\eta(t_0)$, $\dotsc$, $\eta(t)$ of the random variable $y(t)$ one can then also determine, in principle, the probability of simultaneous occurrence of various values $\xi_1(t)$ of the random variable $x_1(t_1)$. This is the conditional probability distribution function
 \begin{equation}
-\label{eq1}
+\label{eneq1}
 Pr[x_1(t_1) \le \xi_1 \vert y(t_0)=\eta(t_0), \dotsc, y(t)=\eta(t)]=F(\xi_1)
 \end{equation}
 
@@ -114,29 +116,29 @@ Suppose now that X1 is given as a fixed function of the random variables $y(t_0)
 L(0)=0
 \end{equation*}
 \begin{equation}
-\label{eq2}
+\label{eneq2}
 L(\epsilon_2) \le L(\epsilon_1) \le 0 \text{ when } \epsilon_2 \le \epsilon_1 \le 0
 \end{equation}
 \begin{equation*}
-L(\epsilon)=L(-\epsilon) 
+L(\epsilon)=L(-\epsilon)
 \end{equation*}
 Some common examples of loss functions are: $L(\epsilon) = a\epsilon^2$, $a\epsilon^4$, $a\vert \epsilon \vert$, $a[1 - \exp(-\epsilon^2)]$, etc., where $a$ is a positive constant.
 
 One (but by no means the only) natural way of choosing the random variable $X_1$ is to require that this choice should minimize the average loss or risk
 \begin{equation}
-\label{eq3}
+\label{eneq3}
 E\{L[x_1(t_1)-X_1(t_1)]\}=E[E\{L[x(t_1)-X_1(t_1)] \vert y(t_0), \dotsc, y(t)\}]
 \end{equation}
-Since the first expectation on the right-hand side of (\ref{eq3}) does not depend on the choice of $X_1$ but only on $y(t_0)$, $\dotsc$, $y(t)$, it is clear that minimizing (\ref{eq3}) is equivalent to minimizing
+Since the first expectation on the right-hand side of (\ref{eneq3}) does not depend on the choice of $X_1$ but only on $y(t_0)$, $\dotsc$, $y(t)$, it is clear that minimizing (\ref{eneq3}) is equivalent to minimizing
 \begin{equation}
-\label{eq4}
+\label{eneq4}
 E\{L[x_1(t_1)-X_1(t_1)] \vert y(t_0), \dotsc, y(t)\}
 \end{equation}
 Under just slight additional assumptions, optimal estimates can be characterized in a simple way.
 
 \begin{theorem}
 \label{th1}
-Assume that L is of type (\ref{eq2}) and that the conditional distribution function $F(\xi)$ defined by (\ref{eq1}) is:
+Assume that L is of type (\ref{eneq2}) and that the conditional distribution function $F(\xi)$ defined by (\ref{eneq1}) is:
 \begin{itemize}
 \item[A] symmetric about the mean $\bar{\xi}$:
     \begin{equation*}
@@ -149,9 +151,9 @@ Assume that L is of type (\ref{eq2}) and that the conditional distribution funct
     \end{multline*}
 for all $\xi_1$, $\xi_2 \le \xi$ and $0 \le \lambda \le 1$
 \end{itemize}
-Then the random variable $x_1^\ast(t_1 \vert t)$ which minimizes the average loss (\ref{eq3}) is the conditional expectation
+Then the random variable $x_1^\ast(t_1 \vert t)$ which minimizes the average loss (\ref{eneq3}) is the conditional expectation
 \begin{equation}
-\label{eq5}
+\label{eneq5}
 x^{\ast}_1(t_1 \vert t)=E[x_1(t_1) \vert y(t_0),\dotsc,y(t)]
 \end{equation}
 \end{theorem}
@@ -168,7 +170,7 @@ In the control system literature, this theorem appears sometimes in a form which
 If $L(\epsilon) = \epsilon^2$, then Theorem \ref{th1} is true without assumptions (A) and (B).
 \end{theorem1a}
 
-\textbf{Proof:} Expand the conditional expectation (\ref{eq4}):
+\textbf{Proof:} Expand the conditional expectation (\ref{eneq4}):
 \begin{equation*}
 E[x_1^2(t_1) \vert y(t_0),\dotsc,y(t)]-2X_1(t_1)E[x_1(t_1) \vert y(t_0),\dotsc,y(t)]+X_1^2(t_1)
 \end{equation*}
@@ -176,7 +178,7 @@ and differentiate with respect to $X_1(t_1)$. This is not a completely rigorous 
 
 \textbf{Remarks.}(a) As far as the author is aware, it is not known what is the most general class of random processes ${x_1(t)}$, ${x_2(t)}$ for which the conditional distribution function satisfies the requirements of Theorem \ref{th1}.
 
-(b) Aside from the note of Sherman, Theorem \ref{th1} apparently has never been stated explicitly in the control systems literature. In fact, one finds many statements to the effect that loss functions of the general type (\ref{eq2}) cannot be conveniently handled mathematically.
+(b) Aside from the note of Sherman, Theorem \ref{th1} apparently has never been stated explicitly in the control systems literature. In fact, one finds many statements to the effect that loss functions of the general type (\ref{eneq2}) cannot be conveniently handled mathematically.
 
 (c) In the sequel, we shall be dealing mainly with vectorvalued random variables. In that case, the estimation problem is stated as: Given a vector-valued random process ${\mathbf{x}(t)}$ and observed random variables $\mathbf{y}(t_0)$, $\dotsc$, $\mathbf{y}(t)$, where $\mathbf{y}(t) = \mathbf{M}\mathbf{x}(t)$ ($\mathbf{M}$ being a singular matrix; in other words, not all co-ordinates of $\mathbf{x}(t)$ can be observed), find an estimate $\mathbf{X}(t_1)$ which minimizes the expected loss $E[L(\Vert x(t_1) - X(t_1)\Vert)]$, $\Vert$ $\Vert$ being the norm of a vector. Theorem \ref{th1} remains true in the vector case also, provided we require that the conditional distribution function of the n coordinates of the vector $\mathbf{x}(t_1)$,
 \begin{equation*}
@@ -194,14 +196,14 @@ In the special cases just mentioned, the explicit solution of the estimation pro
 Consider the (real-valued) random variables $y(t_0)$, $\dotsc$, $y(t)$. The set of all linear combinations of these random variables with real
 coefficients
 \begin{equation}
-\label{eq6}
+\label{eneq6}
 \sum^t_{i=t_0}a_i y(i)
 \end{equation}
-forms a \emph{vector space (linear manifold)} which we denote by $\mathbf{\mathcal{Y}}(t)$. We regard, abstractly, any expression of the form (\ref{eq6}) as “point” or “vector” in $\manf{Y}(t)$; this use of the word “vector” should not be confused, of course, with “vector-valued” random variables, etc. Since we do not want to fix the value of $t$ (i.e., the total number of possible observations), $\manf{Y}(t)$ should be regarded as a finitedimensional subspace of the space of all possible observations.
+forms a \emph{vector space (linear manifold)} which we denote by $\mathbf{\mathcal{Y}}(t)$. We regard, abstractly, any expression of the form (\ref{eneq6}) as “point” or “vector” in $\manf{Y}(t)$; this use of the word “vector” should not be confused, of course, with “vector-valued” random variables, etc. Since we do not want to fix the value of $t$ (i.e., the total number of possible observations), $\manf{Y}(t)$ should be regarded as a finitedimensional subspace of the space of all possible observations.
 
-Given any two vectors $u$, $v$ in $\manf{Y}(t)$ (i.e., random variables expressible in the form (\ref{eq6})), we say that $u$ and $v$ are \emph{orthogonal} if $Euv = 0$. Using the Schmidt orthogonalization procedure, as described for instance by Doob [15], p. 151, or by Lo\`{e}ve [16], p. 459, it is easy to select an \emph{orthonormal basis} in $\manf{Y}(t)$. By this is meant a set of vectors $e_{t_0}$, $\dotsc$, $e_t$ in $\manf{Y}(t)$ such that any vector in $\manf{Y}(t)$ can be expressed as a unique linear combination of $e_{t_0}$, $\dotsc$, $e_t$ and
+Given any two vectors $u$, $v$ in $\manf{Y}(t)$ (i.e., random variables expressible in the form (\ref{eneq6})), we say that $u$ and $v$ are \emph{orthogonal} if $Euv = 0$. Using the Schmidt orthogonalization procedure, as described for instance by Doob [15], p. 151, or by Lo\`{e}ve [16], p. 459, it is easy to select an \emph{orthonormal basis} in $\manf{Y}(t)$. By this is meant a set of vectors $e_{t_0}$, $\dotsc$, $e_t$ in $\manf{Y}(t)$ such that any vector in $\manf{Y}(t)$ can be expressed as a unique linear combination of $e_{t_0}$, $\dotsc$, $e_t$ and
 \begin{equation}
-\label{eq7}
+\label{eneq7}
 \left.\begin{aligned}
 Ee_ie_j=\delta_{ij}&=1 \text{ if } i = j\\
 &=0 \text{ if } i \ne j
@@ -213,24 +215,24 @@ Thus any vector $\bar{x}$ in $\manf{Y}(t)$. is given by
 \bar{x}=\sum^t_{i=t_0}a_ie_i
 \end{equation*}
 and so the coefficients $a_i$ can be immediately determined with the
-aid of (\ref{eq7}):
+aid of (\ref{eneq7}):
 \begin{equation}
-\label{eq8}
+\label{eneq8}
 E\bar{x}e_j=E[\sum^t_{i=t_0}a_ie_i]e_j=\sum^t_{i=t_0}a_iEe_ie_j=\sum^t_{i=t_0}\delta_{ij}=a_j
 \end{equation}
 
 It follows further that any random variable $x$ (not necessarily in $\manf{Y}(t)$) can be uniquely decomposed into two parts: a part $\bar{x}$ in $\manf{Y}(t)$ and a part $\tilde{x}$ orthogonal to $\manf{Y}(t)$ (i.e., orthogonal to every vector in $\manf{Y}(t)$). In fact, we can write
 \begin{equation}
-\label{eq9}
+\label{eneq9}
 x=\bar{x}+\tilde{x}=\sum^t_{i=t_0}(Exe_i)e_i+\tilde{x}
 \end{equation}
 
-Thus $\bar{x}$ is uniquely determined by equation (\ref{eq9}) and is obviously a vector in $\manf{Y}(t)$. Therefore $\tilde{x}$ is also uniquely determined; it remains to check that it is orthogonal to $\manf{Y}(t)$:
+Thus $\bar{x}$ is uniquely determined by equation (\ref{eneq9}) and is obviously a vector in $\manf{Y}(t)$. Therefore $\tilde{x}$ is also uniquely determined; it remains to check that it is orthogonal to $\manf{Y}(t)$:
 \begin{equation*}
 E\tilde{x}e_i=E(x-\bar{x})e_i=Exe_i-E\bar{x}e_i
 \end{equation*}
 
-Now the co-ordinates of $\bar{x}$ with respect to the basis $e_{t_0}$, $\dotsc$, $e_t$, are given either in the form $E\bar{x}e_i$ (as in (\ref{eq8})) or in the form $Exe_i$ (as in (\ref{eq9})). Since the co-ordinates are unique, $Exe_i = E\bar{x}e_i$ ($i = t_0, ..., t$); hence $E\tilde{x}e_i = 0$ and $\tilde{x}$ is orthogonal to every base vector $e_i$; and therefore to $\manf{Y}(t)$. We call $\bar{x}$ the \emph{orthogonal projection} of $x$ on $\manf{Y}(t)$.
+Now the co-ordinates of $\bar{x}$ with respect to the basis $e_{t_0}$, $\dotsc$, $e_t$, are given either in the form $E\bar{x}e_i$ (as in (\ref{eneq8})) or in the form $Exe_i$ (as in (\ref{eneq9})). Since the co-ordinates are unique, $Exe_i = E\bar{x}e_i$ ($i = t_0, ..., t$); hence $E\tilde{x}e_i = 0$ and $\tilde{x}$ is orthogonal to every base vector $e_i$; and therefore to $\manf{Y}(t)$. We call $\bar{x}$ the \emph{orthogonal projection} of $x$ on $\manf{Y}(t)$.
 
 There is another way in which the orthogonal projection can be characterized: $\bar{x}$ is that vector in $\manf{Y}(t)$ (i.e., that linear function of the random variables $y(t_0)$, $\dotsc$, $y(t)$) which minimizes the quadratic loss function. In fact, if $\bar{w}$ is any other vector in $\manf{Y}(t)$, we have
 \begin{equation*}
@@ -239,7 +241,7 @@ E(x-\bar{w})^2=E(\tilde{x}+\bar{x}-\bar{w})^2=E[(x-\bar{x})+(\bar{x}-\bar{w})]^2
 
 Since $\tilde{x}$ is orthogonal to every vector in $\manf{Y}(t)$ and in particular to $\bar{x} - \bar{w}$ we have
 \begin{equation}
-\label{eq10}
+\label{eneq10}
 E(x-\bar{w})^2=E(x-\bar{x})^2+E(\bar{x}-\bar{w})^2 \ge E(x-\bar{x})^2
 \end{equation}
 This shows that, if $\bar{w}$ also minimizes the quadratic loss, we must have $E(\bar{x} - \bar{w})^2 = 0$ which means that the random variables $\bar{x}$ and $\bar{w}$ are equal (except possibly for a set of events whose probability is zero).
@@ -256,23 +258,23 @@ If either
 \end{itemize}
 then
 \begin{multline}
-\label{eq11}
+\label{eneq11}
 x^\ast (t_1 \vert t) = \text{optimal estimate of }x(t_1)\text{ given }y(t_0),\dotsc,y(t)\\
 =\text{orthogonal projection }\bar{x}(t_1 \vert t)\text{ of }x(t_1)\text{ on }\mathbf{\mathcal{Y}}(t)。
 \end{multline}
 \end{theorem}
 
-These results are well-known though not easily accessible in the control systems literature. See Doob [15], pp. 75–78, or Pugachev [26]. It is sometimes convenient to denote the orthogonal projection by
+These results are well-known though not easily accessible in the control systems literature. See Doob [15], pp. 75-78, or Pugachev [26]. It is sometimes convenient to denote the orthogonal projection by
 \begin{equation*}
 \bar{x}(t_1 \vert t) \equiv x^\ast (t_1 \vert t)=\hat{E}[x(t_1) \vert \mathbf{\mathcal{Y}}(t)]
 \end{equation*}
 
-The notation $\hat{E}$ is motivated by part (b) of the theorem: If the stochastic processes in question are gaussian, then orthogonal projection is actually identical with conditional expectation. 
+The notation $\hat{E}$ is motivated by part (b) of the theorem: If the stochastic processes in question are gaussian, then orthogonal projection is actually identical with conditional expectation.
 
 \textbf{Proof.} (A) This is a direct consequence of the remarks in connection
-with (\ref{eq10}).
+with (\ref{eneq10}).
 
-(B) Since $x(t)$, $y(t)$ are random variables with zero mean, it is clear from formula (\ref{eq9}) that the orthogonal part $\tilde{x}(t_1 \vert t)$ of $x(t_1)$ with respect to the linear manifold $\manf{Y}(t)$ is also a random variable with zero mean. Orthogonal random variables with zero mean are uncorrelated; if they are also gaussian then (by Theorem 5 (B)) they are independent. Thus
+(B) Since $x(t)$, $y(t)$ are random variables with zero mean, it is clear from formula (\ref{eneq9}) that the orthogonal part $\tilde{x}(t_1 \vert t)$ of $x(t_1)$ with respect to the linear manifold $\manf{Y}(t)$ is also a random variable with zero mean. Orthogonal random variables with zero mean are uncorrelated; if they are also gaussian then (by Theorem 5 (B)) they are independent. Thus
 \begin{equation*}
 \begin{split}
 0=E\tilde{x}(t_1 \vert t)&=E[\tilde{x}(t_1 \vert t)\vert y(t_0),\dotsc,y(t)]\\
@@ -292,91 +294,42 @@ part (A) shows that the orthogonal projection is the optimal estimate for all re
 \end{equation*}
 of all $m$ co-ordinates of each of the random vectors $y(t_0)$, $\dotsc$, $y(t)$. The rest of the story proceeds as before.
 (g) Theorem \ref{th2} states in effect that the optimal estimate under conditions (A) or (B) is a linear combination of all previous observations. In other words, the optimal estimate can be regarded as the output of a linear filter, with the input being the actually occurring values of the observable random variables; Theorem \ref{th2} gives a way of computing the impulse response of the optimal filter. As pointed out before, knowledge of this impulse response is not a complete solution of the problem; for this reason, no explicit formulas for the calculation of the impulse response will be given.
+
 \section{Models for Random Processes}
-In dealing with physical phenomena, it is not sufficient to give
-an empirical description but one must have also some idea of the
-underlying causes. Without being able to separate in some sense
-causes and effects, i.e., without the assumption of causality, one
-can hardly hope for useful results.
+In dealing with physical phenomena, it is not sufficient to give an empirical description but one must have also some idea of the underlying causes. Without being able to separate in some sense causes and effects, i.e., without the assumption of causality, one can hardly hope for useful results.
 
-It is a fairly generally accepted fact that primary macroscopic
-sources of random phenomena are independent gaussian processes.
-5 A well-known example is the noise voltage produced in a
-resistor due to thermal agitation. In most cases, observed random
-phenomena are not describable by independent random variables.
-The statistical dependence (correlation) between random signals
-observed at different times is usually explained by the presence of
-a dynamic system between the primary random source and the
-observer. Thus a random function of time may be thought of as the
-output of a dynamic system excited by an independent gaussian
-random process.
+It is a fairly generally accepted fact that primary macroscopic sources of random phenomena are independent gaussian processes. A well-known example is the noise voltage produced in a resistor due to thermal agitation. In most cases, observed random phenomena are not describable by independent random variables. The statistical dependence (correlation) between random signals observed at different times is usually explained by the presence of a dynamic system between the primary random source and the observer. \emph{Thus a random function of time may be thought of as the
+output of a dynamic system excited by an independent gaussian random process.}
 
-An important property of gaussian random signals is that they
-remain gaussian after passing through a linear system (Theorem 5
-(A)). Assuming independent gaussian primary random sources, if
-the observed random signal is also gaussian, we may assume that
-the dynamic system between the observer and the primary source
-is linear. This conclusion may be forced on us also because of
-lack of detailed knowledge of the statistical properties of the
-observed random signal: Given any random process with known
-first and second-order averages, we can find a gaussian random
-process with the same properties (Theorem 5 (C)). Thus gaussian
-distributions and linear dynamics are natural, mutually plausible
-assumptions particularly when the statistical data are scant.
+An important property of gaussian random signals is that they remain gaussian after passing through a linear system (Theorem 5 (A)). Assuming independent gaussian primary random sources, if the observed random signal is also gaussian, we may assume that the dynamic system between the observer and the primary source is linear. This conclusion may be forced on us also because of lack of detailed knowledge of the statistical properties of the observed random signal: Given any random process with known first and second-order averages, we can find a gaussian random process with the same properties (Theorem 5 (C)). Thus gaussian distributions and linear dynamics are natural, mutually plausible assumptions particularly when the statistical data are scant.
 
-How is a dynamic system (linear or nonlinear) described? The
-fundamental concept is the notion of the state. By this is meant,
-intuitively, some quantitative information (a set of numbers, a
-function, etc.) which is the least amount of data one has to know
-about the past behavior of the system in order to predict its future
-behavior. The dynamics is then described in terms of state
-transitions, i.e., one must specify how one state is transformed
-into another as time passes.
+How is a dynamic system (linear or nonlinear) described? The fundamental concept is the notion of the state. By this is meant, intuitively, some quantitative information (a set of numbers, a function, etc.) which is the least amount of data one has to know about the past behavior of the system in order to predict its future behavior. The dynamics is then described in terms of state transitions, i.e., one must specify how one state is transformed into another as time passes.
 
-A linear dynamic system may be described in general by the
-vector differential equation
+A linear dynamic system may be described in general by the vector differential equation
 \begin{equation}
-\label{eq12}
+\label{eneq12}
 \left.\begin{aligned}
 &d\mathbf{x}/dt=\mathbf{F}(t)\mathbf{x}+\mathbf{D}(t)\mathbf{u}(t)\\
 \text{ and }\qquad&\\
 &\mathbf{y}(t)=\mathbf{M}(t)\mathbf{x}(t)
 \end{aligned}\right\}
 \end{equation}
-where x is an n-vector, the state of the system (the components xi
-of x are called state variables); u(t) is an m-vector (m ≤ n)
-representing the inputs to the system; F(t) and D(t) are n × n,
-respectively, n × m matrices. If all coefficients of F(t), D(t), M(t)
-are constants, we say that the dynamic system (12) is timeinvariant
-or stationary. Finally, y(t) is a p-vector denoting the
-outputs of the system; M(t) is an n × p matrix; p ≤ n
-
+where $\vect{x}$ is an $n$-vector, the state of the system (the components $x_i$ of $\vect{x}$ are called state variables); $\vect{u}(t)$ is an $m$-vector ($m \le n$) representing the inputs to the system; $\vect{F}(t)$ and $\vect{D}(t)$ are $n \times n$, respectively, $n \times m$ matrices. If all coefficients of $\vect{F}(t)$, $\vect{D}(t)$, $\vect{M}(t)$ are constants, we say that the dynamic system (\ref{eneq12}) is timeinvariant or stationary. Finally, $\vect{y}(t)$ is a $p$-vector denoting the outputs of the system; $\vect{M}(t)$ is an $n \times p$ matrix; $p \le n$
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.5\paperwidth]{fig/fg1.pdf}
 \caption{Matrix block diagram of the general linear continuous-dynamic system}
-\label{fg1}
+\label{enfg1}
 \end{figure}
 
-The physical interpretation of (12) has been discussed in detail
-elsewhere [18, 20, 23]. A look at the block diagram in Fig. 1 may
-be helpful. This is not an ordinary but a matrix block diagram (as
-revealed by the fat lines indicating signal flow). The integrator in Fig. 1 actually stands for n integrators such that the output of
-each is a state variable; F(t) indicates how the outputs of the
-integrators are fed back to the inputs of the integrators. Thus fij(t)
-is the coefficient with which the output of the jth integrator is fed
-back to the input of the ith integrator. It is not hard to relate this
-formalism to more conventional methods of linear system
-analysis.
+The physical interpretation of (\ref{eneq12}) has been discussed in detail elsewhere [18, 20, 23]. A look at the block diagram in Fig. \ref{enfg1} may be helpful. This is not an ordinary but a matrix block diagram (as revealed by the fat lines indicating signal flow). The integrator in Fig. \ref{enfg1} actually stands for $n$ integrators such that the output of each is a state variable; $\vect{F}(t)$ indicates how the outputs of the integrators are fed back to the inputs of the integrators. Thus $f_{ij}(t)$ is the coefficient with which the output of the $j$th integrator is fed back to the input of the $i$th integrator. It is not hard to relate this formalism to more conventional methods of linear system analysis.
 
-If we assume that the system (12) is stationary and that u(t) is
-constant during each sampling period, that is
+If we assume that the system (\ref{eneq12}) is stationary and that $\vect{u}(t)$ is constant during each sampling period, that is
 \begin{equation}
-\label{eq13}
+\label{eneq13}
 \mathbf{u}(t+\tau)=\mathbf{u}(t)\text{; }0 \le \tau < 1\text{, }t=0,1,\dotsc
 \end{equation}
-then (12) can be readily transformed into the more convenient
-discrete form.
+then (12) can be readily transformed into the more convenient discrete form.
 \begin{equation*}
 \mathbf{x}(t+1)=\boldsymbol{\Phi}(1)\mathbf{x}(t)+\boldsymbol{\Delta}(1)\mathbf{u}(t)\text{; }t=0,1,\dotsc
 \end{equation*}
@@ -392,50 +345,33 @@ and
 \centering
 \includegraphics[width=0.5\paperwidth]{fig/fg2.pdf}
 \caption{Matrix block diagram of the general linear discrete-dynamic system}
-\label{fg2}
+\label{enfg2}
 \end{figure}
-See Fig. 2. One could also express exp Fτ in closed form using
-Laplace transform methods [18, 20, 22, 24]. If u(t) satisfies (13)
-but the system (12) is nonstationary, we can write analogously
+See Fig. \ref{enfg2}. One could also express $\exp \vect{F}\tau$ in closed form using Laplace transform methods [18, 20, 22, 24]. If $\vect{u}(t)$ satisfies (\ref{eneq13}) but the system (\ref{eneq12}) is nonstationary, we can write analogously
 \begin{equation}
-\label{eq14}
+\label{eneq14}
 \left.\begin{aligned}
 \mathbf{x}(t+1)&=\boldsymbol{\Phi}(t+1;t)+\boldsymbol{\Delta}(t)\mathbf{u}(t)\\
 \mathbf{y}(t)&=\mathbf{M}(t)\mathbf{x}(t)
 \end{aligned}\right\}
 \qquad t=0,1,\dotsc
 \end{equation}
-but of course now Φ(t + 1; t), Δ(t) cannot be expressed in general
-in closed form. Equations of type (14) are encountered frequently
-also in the study of complicated sampled-data systems
-[22]. See Fig. 2
+but of course now $\boldPhi(t + 1; t)$, $\boldDelta(t)$ cannot be expressed in general in closed form. Equations of type (\ref{eneq14}) are encountered frequently also in the study of complicated sampled-data systems [22]. See Fig. \ref{enfg2}
 
-Φ(t + 1; t) is the transition matrix of the system (12) or (14).
-The notation Φ(t2; t1) (t2, t1 = integers) indicates transition from
-time t1 to time t2. Evidently Φ(t; t) = I = unit matrix. If the system
-(12) is stationary then Φ(t + 1; t) = Φ(t + 1 – t) = Φ(1) = const.
-Note also the product rule: Φ(t; s)Φ(s; r) = Φ(t; r) and the inverse
-rule Φ–1(t; s) = Φ(s; t), where t, s, r are integers. In a stationary
-system, Φ(t; τ) = exp F(t – τ).
+$\boldPhi(t + 1; t)$ is the transition matrix of the system (\ref{eneq12}) or (\ref{eneq14}). The notation $\boldDelta(t_2; t_1)$ ($t_2, t_1 =$ integers) indicates transition from time $t_1$ to time $t_2$. Evidently $\boldPhi(t; t) = \vect{I} =$ unit matrix. If the system (\ref{eneq12}) is stationary then $\boldPhi(t + 1; t) = \boldPhi(t + 1 - t) = \boldPhi(1) =$ const. Note also the product rule: $\boldPhi(t; s)\boldPhi(s; r) = \boldPhi(t; r)$ and the inverse rule $\boldPhi^{-1}(t; s) = \boldPhi(s; t)$, where $t$, $s$, $r$ are integers. In a stationary system, $\boldPhi(t; τ) = \exp \vect{F}(t - τ)$.
 
-As a result of the preceding discussion, we shall represent random
-phenomena by the model
+As a result of the preceding discussion, we shall represent random phenomena by the model
 \begin{equation}
-\label{eq15}
+\label{eneq15}
 \mathbf{x}(t+1)=\boldPhi(t+1;t)\mathbf{x}(t)+\mathbf{u}(t)
 \end{equation}
-where {u(t)} is a vector-valued, independent, gaussian random
-process, with zero mean, which is completely described by (in
-view of Theorem 5 (C))
+where $\{\vect{u}(t)\}$ is a vector-valued, independent, gaussian random process, with zero mean, which is completely described by (in view of Theorem 5 (C))
 \begin{align*}
 E\mathbf{u}(t)=0 \text{ for all } t;\\
 E\mathbf{u}(t)\mathbf{u'}(s)=0 \text{ if } t \ne s\\
 E\mathbf{u}(t)\mathbf{u'}(t)=\mathbf{G}(t).
 \end{align*}
-Of course (Theorem 5 (A)), x(t) is then also a gaussian random
-process with zero mean, but it is no longer independent. In fact, if
-we consider (15) in the steady state (assuming it is a stable system),
-in other words, if we neglect the initial state x(t0), then
+Of course (Theorem A-5 (A)), $\vect{x}(t)$ is then also a gaussian random process with zero mean, but it is no longer independent. In fact, if we consider (\ref{eneq15}) in the steady state (assuming it is a stable system), in other words, if we neglect the initial state x(t0), then
 \begin{equation*}
 \mathbf{x}(t)=\sum^{t-1}_{r=-\infty}\boldPhi(t;r+1)\mathbf{u}(r).
 \end{equation*}
@@ -443,33 +379,13 @@ Therefore if t ≥ s we have
 \begin{equation*}
 E\mathbf{x}(t)\mathbf{x'}(s)=\sum^{s-1}_{r=-\infty}\boldPhi(t;r+1)\mathbf{Q'}(r)\boldsymbol{\Phi'}(s;r+1).
 \end{equation*}
-Thus if we assume a linear dynamic model and know the
-statistical properties of the gaussian random excitation, it is easy
-to find the corresponding statistical properties of the gaussian
-random process {x(t)}.
+Thus if we assume a linear dynamic model and know the statistical properties of the gaussian random excitation, it is easy to find the corresponding statistical properties of the gaussian random process $\{\vect{x}(t)\}$.
 
-In real life, however, the situation is usually reversed. One is
-given the covariance matrix Ex(t)x'(s) (or rather, one attempts to
-estimate the matrix from limited statistical data) and the problem
-is to get (15) and the statistical properties of u(t). This is a subtle
-and presently largely unsolved problem in experimentation and
-data reduction. As in the vast majority of the engineering
-literature on the Wiener problem, we shall find it convenient to
-start with the model (15) and regard the problem of obtaining the
-model itself as a separate question. To be sure, the two problems
-should be optimized jointly if possible; the author is not aware,
-however, of any study of the joint optimization problem.
+In real life, however, the situation is usually reversed. One is given the covariance matrix $E\vect{x}(t)\vect{x'}(s)$ (or rather, one attempts to estimate the matrix from limited statistical data) and the problem is to get (\ref{eneq15}) and the statistical properties of $\vect{u}(t)$. This is a subtle and presently largely unsolved problem in experimentation and data reduction. As in the vast majority of the engineering literature on the Wiener problem, we shall find it convenient to start with the model (\ref{eneq15}) and regard the problem of obtaining the model itself as a separate question. To be sure, the two problems should be optimized jointly if possible; the author is not aware, however, of any study of the joint optimization problem.
 
-In summary, the following assumptions are made about random
-processes:
+In summary, the following assumptions are made about random processes:
 
-Physical random phenomena may be thought of as due to
-primary random sources exciting dynamic systems. The primary
-sources are assumed to be independent gaussian random
-processes with zero mean; the dynamic systems will be linear. The
-random processes are therefore described by models such as (15).
-The question of how the numbers specifying the model are
-obtained from experimental data will not be considered.
+\emph{Physical random phenomena may be thought of as due to primary random sources exciting dynamic systems. The primary sources are assumed to be independent gaussian random processes with zero mean; the dynamic systems will be linear. The random processes are therefore described by models such as (\ref{eneq15}). The question of how the numbers specifying the model are obtained from experimental data will not be considered.}
 \section{Solution of the Wiener problem}
 \section{The Dual Problem}
 \section{Applications}
